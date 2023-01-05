@@ -56,3 +56,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
 //#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+//
+
+
+#define GRAVE_ESC_ALT_OVERRIDE
