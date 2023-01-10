@@ -38,11 +38,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FN] = LAYOUT_all(
-		QK_BOOT,   KC_BRID,   KC_BRIU,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MEDIA_PREV_TRACK,   KC_MEDIA_PLAY_PAUSE,   KC_MEDIA_NEXT_TRACK,   KC_F10,  KC_F11,  KC_F12,  _______, _______, KC_KB_VOLUME_UP,
+		QK_BOOT, KC_BRID, KC_BRIU,   KC_F3,   KC_F4,   KC_F5,   KC_F6, KC_MEDIA_PREV_TRACK,   KC_MEDIA_PLAY_PAUSE,   KC_MEDIA_NEXT_TRACK,   KC_F10,  KC_F11,  KC_F12,  _______, _______, KC_KB_VOLUME_UP,
 		_______, _______, _______, KC_PGUP, _______, _______, _______, _______, KC_UP,   _______, _______, _______, _______,          _______, KC_KB_VOLUME_DOWN,
 		_______, _______, KC_HOME, KC_PGDN, KC_END,  _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,          _______,          KC_ENT,
-		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, KC_PGUP, _______,
-		KC_CAPS, _______, _______,                            _______,                            _______, _______,          KC_HOME, KC_PGDN, KC_END
+		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, KC_KB_VOLUME_UP, _______,
+		KC_CAPS, _______, _______,                            _______,                            _______, _______,          KC_HOME, KC_KB_VOLUME_DOWN, KC_ENT
     )
 
 };
