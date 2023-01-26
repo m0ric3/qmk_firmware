@@ -14,7 +14,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "keycodes.h"
 #include QMK_KEYBOARD_H
 
 
@@ -51,11 +50,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Shift + esc = ~
 const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, S(KC_GRV));
 
-// GUI + esc = `
-const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, KC_GRV);
+// CTRL + esc = `
+const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_CTRL, KC_ESC, KC_GRV);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &tilde_esc_override,
     &grave_esc_override,
     NULL
 };
+
+
+
+// Custom Caps Word Word Breaking
+// Modifications from Default:
+//  KC_SCLN will be shifted and continue caps Word
+//  KC_EQL will not be shifted and continue caps word
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+        case KC_MINS:
+        case KC_SCLN:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+        case KC_EQL:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
+
+
+
+
