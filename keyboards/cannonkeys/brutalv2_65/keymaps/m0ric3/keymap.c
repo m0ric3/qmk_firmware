@@ -36,12 +36,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		CW_TOGG, KC_LALT, KC_LGUI,                            KC_SPC,                             KC_RGUI, KC_LALT,          KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
+// See https://github.com/qmk/qmk_firmware/issues/4750 for KC_SCRL and KC_PAUS usage instead of KC_BRID and KC_BRIU for brightness control
+// https://github.com/qmk/qmk_firmware/pull/4836
     [_FN] = LAYOUT_all(
-		QK_BOOT, KC_BRID, KC_BRIU,   KC_F3,   KC_F4,   KC_F5,   KC_F6, KC_MEDIA_PREV_TRACK,   KC_MEDIA_PLAY_PAUSE,   KC_MEDIA_NEXT_TRACK,   KC_F10,  KC_F11,  KC_F12,  _______, _______, KC_KB_VOLUME_UP,
-		_______, _______, _______, KC_PGUP, _______, _______, _______, _______, KC_UP,   _______, _______, _______, _______,          _______, KC_KB_VOLUME_DOWN,
-		_______, _______, KC_HOME, KC_PGDN, KC_END,  _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,          _______,          KC_ENT,
-		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, KC_KB_VOLUME_UP, _______,
-		KC_CAPS, _______, _______,                            _______,                            _______, _______,          KC_HOME, KC_KB_VOLUME_DOWN, KC_ENT
+		QK_BOOT, KC_BRMD, KC_BRMU,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12, _______, _______, KC_VOLU,
+		_______, _______, _______, KC_PGUP, _______, _______, _______, _______,   KC_UP, _______, _______, _______, _______,          _______, KC_VOLD,
+		_______, _______, KC_HOME, KC_PGDN,  KC_END, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,          _______,          KC_MPLY,
+		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, KC_VOLU, _______,
+		KC_CAPS, _______, _______,                            _______,                            _______, _______,          KC_HOME, KC_VOLD, KC_ENT
     )
 
 };
@@ -51,7 +53,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, S(KC_GRV));
 
 // CTRL + esc = `
-const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_CTRL, KC_ESC, KC_GRV);
+// everytime I press the GRV key it sends another CTR. So CTRL hold down and double tap GRV will type two ` but it will also send 2 CTRL KCs
+const key_override_t grave_esc_override = ko_make_with_layers_negmods_and_options(
+        MOD_MASK_CTRL,
+        KC_ESC,
+        KC_GRV,
+        ~0,
+        MOD_MASK_SA,
+        ko_option_no_reregister_trigger);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &tilde_esc_override,
