@@ -23,7 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // entirely and just use numbers.
 enum layer_names {
     _BASE,
-    _FN
+    _FN,
+    _FUNC
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -39,13 +40,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // See https://github.com/qmk/qmk_firmware/issues/4750 for KC_SCRL and KC_PAUS usage instead of KC_BRID and KC_BRIU for brightness control
 // https://github.com/qmk/qmk_firmware/pull/4836
     [_FN] = LAYOUT_all(
-		QK_BOOT, KC_BRMD, KC_BRMU,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12, _______, _______, KC_VOLU,
+		QK_BOOT, KC_BRMD, KC_BRMU,   KC_F3,   KC_F4,   KC_F5,   KC_F6, KC_MPRV, KC_MPLY, KC_MNXT,  KC_F10,  KC_F11,  KC_F12, _______, _______, KC_VOLU,
 		_______, _______, _______, KC_PGUP, _______, _______, _______, _______,   KC_UP, _______, _______, _______, _______,          _______, KC_VOLD,
 		_______, _______, KC_HOME, KC_PGDN,  KC_END, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,          _______,          KC_MPLY,
 		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, KC_VOLU, _______,
 		KC_CAPS, _______, _______,                            _______,                            _______, _______,          KC_HOME, KC_VOLD, KC_ENT
     ),
 
+// see https://docs.qmk.fm/#/feature_tap_dance for ideas on how to toggle the full function row
     [_FUNC] = LAYOUT_all(
 		 KC_ESC,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12, _______, _______, _______,
 		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
